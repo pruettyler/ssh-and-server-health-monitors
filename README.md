@@ -14,23 +14,19 @@ along with two basic system health metrics: disk usage, and package updates. Eac
 
 ## Architecture / Design
 
-This program divides into two areas of interest: server security, and server health.
+This program is divided into two areas of interest: server security, and server health.
 
-"ssh_login_monitor.py" is the security engine. It aggregates every unique login event in its own dictionary, and stores
+"ssh_login_monitor.py" is the security engine. It aggregates every unique login event in its own dictionary and stores
 these individual event dictionaries in a list. This list represents the "master" data repository. As each event is registered,
 the login monitor also assembles one of three possible dictionaries (failed_by_user, failed_by_ip, and accepted_by_user).
 This process aggregates the data once, during parsing, rather than rescanning the event list every time. This enables the
 detection functions to answer their questions via a single dictionary lookup rather than repeated O(n) scans.
 
 The four detection functions each check one specific pattern: too many failed logins, a user with too many unique IPs,
-an IP spraying many usernames, and "breakthrough" logins in which a username that is associated with too many failures
-also succeeds. Every function follows the same structure: return None or return the raw data which is either a set or 
-dictionary. make_report() is tasked with transforming this detection data into readable text output, thus keeping detection
+an IP spraying many usernames, and "breakthrough" logins in which a username associated with too many failures
+also succeeds in logging in. Every function follows the same structure: return None or return the raw data in the form of a set
+or a dictionary. make_report() is tasked with transforming this detection data into readable text output, thus keeping detection
 logic separate from presentation.
-
-One deliberate simplification: "too_many_unique_ips()" and "too_many_unique_usernames()" are structurally identical and
-have been made separate to clarify the detection patterns, although a shared helper function could reduce redundancy in
-a future revision.
 
 "server_health_monitor.py" has three functions. get_login_summary() aggregates the total number of failed and successful 
 logins by IP. This is data that could also be assembled via "ssh_login_monitor.py" but which is also valuable for a picture
@@ -106,10 +102,10 @@ slothrop@ubuntu-lab-space:~$
 
 ## Known Limitations / Future Work
 
-As mentioned earlier, "too_many_unique_ips()" and "too_many_unique_usernames()" share nearly identical logic. Thus, a shared
-helper function would reduce duplications in future iterations of this script. Additionally, the "breakthrough_login()" functions 
-does not check the timestamp differences between failure and success events, which would give a more accurate depiction of the 
-breakthrough login event. 
+One deliberate simplification: "too_many_unique_ips()" and "too_many_unique_usernames()" are structurally identical and
+have been made separate to clarify the detection patterns. Thus, a shared helper function would reduce duplications in
+future iterations of this script. Additionally, the "breakthrough_login()" functions does not check the timestamp
+differences between failure and success events, which would give a more accurate depiction of the breakthrough login event. 
 
 ## Author
 
