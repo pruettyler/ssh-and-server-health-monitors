@@ -1,0 +1,49 @@
+# from ssh_login_monitor.py test run 
+
+2026-08-14T22:34:26.160339+00:00 ubuntu-lab-space sshd-session[2709]: Connection closed by authenticating user slothrop 10.0.2.2 port 59754 [preauth]
+
+slothrop@ubuntu-lab-space:~/Python_Scripts$ python3 ssh_login_monitor.py
+Users: bob registered more than 5 failures within a 5 minute window.
+IPs: 10.0.2.2 registered more than 5 failures within a 5 minute window.
+
+IPs: 10.0.2.2 registered more than 5 failures within a 5 minute window.
+
+Users: slothrop registered more than 5 failures within a 5 minute window.
+IPs: 10.0.2.2 registered more than 5 failures within a 5 minute window.
+This IP: 10.0.2.2 is also linked to a username that broke through.
+Users: slothrop registered more than 5 failures and then succeeded.
+
+IPs: 10.0.2.2 registered more than 5 failures within a 5 minute window.
+This flagged IP: 10.0.2.2 also registered more than 5 usernames: {'olive', 'jinna', 'jake', 'paz', 'kexin', 'jack'}.
+
+Users: slothrop registered more than 5 failures within a 5 minute window.
+IPs: 10.0.2.2 registered more than 5 failures within a 5 minute window.
+
+# ---------------------------------------------------------------------------------------------------------------- 
+
+# from server_health_check.py test run
+
+slothrop@ubuntu-lab-space:~/Python_Scripts$ python3 server_health_check.py
+IP:10.0.2.2 registered 11 successful logins and 49 failed logins.
+---Disk Usage---
+ Filesystem                         Size  Used Avail Use% Mounted on
+tmpfs                              329M  1.1M  328M   1% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv   12G  5.0G  5.7G  47% /
+tmpfs                              822M     0  822M   0% /dev/shm
+none                               1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+none                               1.0M     0  1.0M   0% /run/credentials/systemd-resolved.service
+tmpfs                              822M     0  822M   0% /tmp
+/dev/sda2                          2.0G   96M  1.7G   6% /boot
+none                               1.0M     0  1.0M   0% /run/credentials/systemd-networkd.service
+none                               1.0M     0  1.0M   0% /run/credentials/getty@tty1.service
+tmpfs                              165M  8.0K  165M   1% /run/user/1000
+---Package Updates---
+ Listing...
+---Uptime---
+ up 3 minutes
+---Memory Usage---
+ total        used        free      shared  buff/cache   available
+Mem:           1.6Gi       349Mi       1.0Gi       1.0Mi       412Mi       1.3Gi
+Swap:          2.0Gi          0B       2.0Gi
+---CPU Usage---
+ %Cpu(s):  0.0 us,  0.0 sy,  0.0 ni, 95.0 id,  0.0 wa,  0.0 hi,  5.0 si,  0.0 st
