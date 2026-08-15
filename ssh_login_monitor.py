@@ -65,13 +65,17 @@ def scan_auth_log():
 
 	try:
 		with open("login_offset.txt", "r") as offset_file:
-			offset = int(offset_file.read().strip())
+			contents = offset_file.read().strip()
+			if contents:
+				offset = int(contents)
+			else:
+				offset = 0
+
 	except FileNotFoundError:
 		offset = 0
 
 
 	# read and parse auth.log, starting at offset
-	
 	try:
 		with open("/var/log/auth.log", "r") as login_file:
 
