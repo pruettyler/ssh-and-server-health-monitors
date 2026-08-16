@@ -1,6 +1,9 @@
 [Unit]
 Description = SSH Login Monitor
 After = local-fs.target
+StartLimitIntervalSec = 60
+StartLimitBurst = 5
+
 
 [Service]
 Type = simple
@@ -11,8 +14,6 @@ ExecStart = /usr/bin/python3 /home/ubuntu/monitoring-scripts/ssh_login_monitor.p
 Restart = always
 RestartSec = 10
 
-StartLimitIntervalSec = 60
-StartLimitBurst = 5
 
 [Install]
 WantedBy = multi-user.target
