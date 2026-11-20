@@ -1,6 +1,4 @@
-# Project Title
-
-"SSH Login and Server Health Monitors"
+# SSH Login and Server Health Monitors
 
 ## Overview
 
